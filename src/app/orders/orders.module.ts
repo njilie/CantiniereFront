@@ -7,6 +7,7 @@ import { OrdersComponent } from '../orders/orders.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [OrdersComponent],
@@ -15,7 +16,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     OrdersRoutingModule,
     MatIconModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatBadgeModule
   ]
 })
 export class OrdersModule { }

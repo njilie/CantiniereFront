@@ -171,11 +171,11 @@ export class OrderService {
     type: string,
     mealId?: number,
     menuId?: number): void {
-    // On crée une variable newQuantity qui contiendra toutes nos quantités(repas/meanus)
+    // On crée une variable newQuantity qui contiendra toutes nos quantités(repas/menus)
     // de la commande plus la nouvelle
     const newQuantity: QuantityIN[] = [];
 
-    // On parcours l'array contenant toutes les quantités(repas/meanus)
+    // On parcours l'array contenant toutes les quantités(repas/menus)
     // de la commande
     quantity.forEach(element => {
       // A chaque boucle,
@@ -195,7 +195,7 @@ export class OrderService {
     });
 
     // Enfin, on ajoute toutes les quantités dans la variable updatedContent
-    const updatedContent = {
+    const updatedContent: OrderIN = {
       userId,
       constraintId: 2,
       quantity: newQuantity

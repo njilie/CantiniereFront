@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,8 +9,8 @@ import { MenuService } from '../shared/services/menu.service';
 import { OrderService } from '../shared/services/order.service';
 
 import { User /*UserOUT*/ } from '../shared/interfaces/user';
-import { OrderOUT, PriceOUT } from '../shared/interfaces/order';
-import { QuantityOUT } from '../shared/interfaces/quantity';
+import { OrderIN, OrderOUT, PriceOUT } from '../shared/interfaces/order';
+import { QuantityIN, QuantityOUT } from '../shared/interfaces/quantity';
 import { ImageOUT } from '../shared/interfaces/image';
 import { ConstraintService } from '../shared/services/constraint.service';
 import { ConstraintIN } from '../shared/interfaces/constraint';
@@ -39,7 +39,8 @@ export class OrdersComponent implements OnInit {
     private mealService: MealService,
     private constraintService: ConstraintService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -94,9 +95,9 @@ export class OrdersComponent implements OnInit {
           // this.imageMenu(order.quantity);
           // this.imageMeal(order.quantity);
           this.computePrice(order.id, 2);
-
-          this.loading = false;
         });
+
+        this.loading = false;
       },
       (error) => {
         console.log(error);
@@ -230,4 +231,60 @@ export class OrdersComponent implements OnInit {
     }
   }
 
+  removeFromOrder(
+    orderToUpdateId: number,
+    quantity: QuantityOUT[],
+    quantityToDeleteId: number): void {
+    if (quantity.length === 1) {
+      this.removeOrder(orderToUpdateId);
+    } else {
+      if (confirm('Etes-vous sûr de vouloir retirer ce produit du panier ?')) {
+        this.loading = true;
+
+        // On crée une variable newQuantity qui contiendra toutes nos quantités(repas/menus)
+        const newQuantity: QuantityIN[] = [];
+
+        // On supprime, de l'array contenant toutes les quantités(repas/menus)
+        // de la commande, la quantité(repas/menus) choisie pas l'utilisateur
+        quantity = quantity.filter(element => element.id !== quantityToDeleteId);
+        console.log(quantity);
+        // Ensuite, on parcours l'array contenant toutes les quantités(repas/menus)
+        // de la commande
+        quantity.forEach(element => {
+          // A chaque boucle,
+          // on ajoute, à l'array newQuantity, les données qui nous intéressent
+          newQuantity.push({
+            quantity: element.quantity,
+            mealId: element.meal ? element.meal.id : null,
+            menuId: element.menu ? element.menu.id : null
+          });
+        });
+
+        // Enfin, on ajoute toutes les quantités dans la variable updatedContent
+        const updatedContent: OrderIN = {
+          userId: this.user.id,
+          constraintId: 2,
+          quantity: newQuantity
+        };
+
+        this.orderService.update(orderToUpdateId, updatedContent).subscribe(
+          () => {
+            const snackBarRef = this.snackBar.open(`Produit supprimé du panier`, '', {
+              duration: 2000,
+              verticalPosition: 'bottom'
+            });
+            snackBarRef.afterDismissed().subscribe(() => {
+              this.ngOnInit();
+            });
+          },
+          (error) => {
+            console.log(error);
+            if (error.status === 412 && error.exceptionMessage === 'L\'heure authorisée pour passer une commande est dépassée') {
+              alert('Erreur : La modification d\'un élément au panier ne peut se faire qu\'avant 10h30');
+            }
+          }
+        );
+      }
+    }
+  }
 }

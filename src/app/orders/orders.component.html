@@ -60,19 +60,22 @@
       </div>
 
       <div *ngFor="let quantity of order.quantity">
+        <div *ngIf="order.status === 0" class="cursor-pointer delete-product float-right">
+          <mat-icon (click)="removeFromOrder(order.id, order.quantity, quantity.id)">delete</mat-icon>
+        </div>
         <div class="row" *ngIf="quantity.menu">
           <div class="col-md-8">
             <div class="message-box menu-description-container">
               <h2>Menu: {{ quantity.menu.label }}</h2>
               <div *ngFor="let meal of quantity.menu.meals">
                 <p>Plat : {{ meal.label }}</p>
-                <p>Prix: <span class="text-important">11.50 €</span></p>
+                <p>Prix: <span class="text-important">{{ meal.priceDF }} €</span></p>
               </div>
             </div>
 
             <!-- <button *ngIf="order.status === 0" class="sim-btn hvr-radial-in">Commander</button> -->
           </div>
-          <div class="col-md-3">
+          <div matBadge="{{ quantity.quantity }}" class="col-md-3">
             <div class="services-inner-box">
               <div class="ser-icon">
                 <img
@@ -96,12 +99,12 @@
                 </ul>
               </div>
 
-              <p>Prix: <span class="text-important">{{ quantity.meal.priceDF }} €</span></p>
+              <p>Prix: <span class="text-important">{{ quantity.meal.priceDF * quantity.quantity }} €</span></p>
             </div>
     
             <!-- <button *ngIf="order.status === 0" class="sim-btn hvr-radial-in">Commander</button> -->
           </div>
-          <div class="col-md-3">
+          <div [matBadge]="quantity.quantity" class="col-md-3">
             <div class="services-inner-box">
               <div class="ser-icon">
                 <img
