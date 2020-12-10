@@ -73,8 +73,6 @@ export class ProfileComponent implements OnInit {
       town: [''],
       sex: ['', Validators.required],
     });
-
-    console.log(this.user);
   }
 
   userImage(userId: number): void {
@@ -128,7 +126,6 @@ export class ProfileComponent implements OnInit {
       };
       this.user.image = this.newProfilePicture;
       console.log(this.newProfilePicture);
-      console.log(this.user);
       this.showBtnSavePic = true;
     };
     reader.onerror = (error) => {

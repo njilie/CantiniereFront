@@ -65,7 +65,6 @@ export class UserService {
   }
 
   updateImage(userId: number, image: ImageIN): any {
-    console.log(image);
     return (
       this.http
         .patch<any>(`${API_URL}/user/updateimg/${userId}`, image)
