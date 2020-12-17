@@ -3,11 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { MealService } from '../../../shared/services/meal.service';
 import { OrderService } from '../../../shared/services/order.service';
 import { AuthService } from '../../../shared/auth/auth.service';
-import { ConstraintService } from '../../../shared/services/constraint.service';
 
 import { MealOUT } from '../../../shared/interfaces/meal';
 import { ImageOUT } from '../../../shared/interfaces/image';
-import { OrderIN } from '../../../shared/interfaces/order';
 import { QuantityIN, QuantityOUT } from '../../../shared/interfaces/quantity';
 import { User /*UserOUT*/} from '../../../shared/interfaces/user';
 
