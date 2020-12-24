@@ -139,7 +139,7 @@ export class ProfileComponent implements OnInit {
         (data) => {
           console.log(data);
           localStorage.setItem('userChangedValues', JSON.stringify(data));
-          alert('Photo de profil mofifiées succès');
+          alert('Photo de profil mofifiée succès');
           this.showBtnSavePic = false;
         },
         (error) => {

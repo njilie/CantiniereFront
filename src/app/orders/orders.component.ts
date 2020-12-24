@@ -39,8 +39,7 @@ export class OrdersComponent implements OnInit {
     private mealService: MealService,
     private constraintService: ConstraintService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private router: Router) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -247,7 +246,7 @@ export class OrdersComponent implements OnInit {
         // On supprime, de l'array contenant toutes les quantités(repas/menus)
         // de la commande, la quantité(repas/menus) choisie pas l'utilisateur
         quantity = quantity.filter(element => element.id !== quantityToDeleteId);
-        console.log(quantity);
+
         // Ensuite, on parcours l'array contenant toutes les quantités(repas/menus)
         // de la commande
         quantity.forEach(element => {

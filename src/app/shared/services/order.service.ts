@@ -89,7 +89,6 @@ export class OrderService {
   }
 
   update(orderId: number, order: OrderIN): Observable<OrderOUT> {
-    console.log(order);
     return (
       this.http
         .patch<OrderOUT>(`${API_URL}/order/update/${orderId}`, order)
