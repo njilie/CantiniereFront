@@ -5,19 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomeModule } from './home/home.module';
-import { OrdersModule } from './orders/orders.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { TemplateComponent } from './template/template.component';
-import { LoginComponent } from './authentication/login/login.component';
-import { RegisterComponent } from './authentication/register/register.component';
-import { ForgotComponent } from './authentication/forgot/forgot.component';
-import { LogoutComponent } from './authentication/logout/logout.component';
-import { ProfileComponent } from './profile/profile.component';
-import { LoaderComponent } from './loader/loader.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { FooterComponent } from './footer/footer.component';
+import { TemplateComponent } from './components/template/template.component';
+import { MealsOfMenuComponent } from './pages/meals-of-menu/meals-of-menu.component';
+import { LoginComponent } from './pages/authentication/login/login.component';
+import { RegisterComponent } from './pages/authentication/register/register.component';
+import { ForgotComponent } from './pages/authentication/forgot/forgot.component';
+import { LogoutComponent } from './pages/authentication/logout/logout.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 import { OrderService } from './shared/services/order.service';
 
@@ -48,9 +46,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ForgotComponent,
     LogoutComponent,
     ProfileComponent,
-    LoaderComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    MealsOfMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +63,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HomeModule,
-    OrdersModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatCardModule,

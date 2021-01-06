@@ -1,0 +1,119 @@
+<div class="section lb">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate" class="m-b-15"></mat-progress-bar>
+  
+  <div class="container-fluid">
+    <header>
+      <div class="row">
+        <div class="col-lg-8">
+          <button *ngIf="allOrdersUrl; else allMenusBtn" [routerLink]="['../']" class="sim-btn hvr-radial-in">
+            Mes commandes en cours
+          </button>
+          <ng-template #allMenusBtn>
+            <button [routerLink]="['all']" class="sim-btn hvr-radial-in">
+              Toutes mes commandes
+            </button>
+          </ng-template>
+        </div>
+
+        <div *ngIf="orders" class="col-lg-4">
+          <div *ngIf="orders[0]">
+            <button *ngIf="orders[0].status === 0" (click)="makeOrder(orders[0].id)"
+            class="sim-btn hvr-radial-in m-r-10">
+              Commander
+            </button>
+            <button *ngIf="orders[0].status === 0" (click)="removeOrder(orders[0].id)"
+            class="sim-btn hvr-radial-in">
+              Annuler la commande
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="message-box">
+            <h2>Mon panier</h2>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="message-box">
+            <h2>
+              Argent restant : <span class="text-important">{{ user.wallet | number:'1.1-2' }} €</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div *ngFor="let order of orders; let i = index">
+      <div class="row message-box order-number-container">
+        <div class="col-md-8">
+          <h2>Commande n° {{ order.id }}</h2>
+        </div>
+        <div *ngIf="totalsPrices[i]" class="col-md-3">
+          <h2>
+            Prix total TTC de la commande: 
+            <span class="text-important">{{ totalsPrices[i].priceVAT | number:'1.1-2' }} €</span>
+          </h2>
+        </div>
+      </div>
+
+      <div *ngFor="let quantity of order.quantity">
+        <div *ngIf="order.status === 0" class="cursor-pointer delete-product float-right">
+          <mat-icon (click)="removeFromOrder(order.id, order.quantity, quantity.id)">delete</mat-icon>
+        </div>
+        <div class="row" *ngIf="quantity.menu">
+          <div class="col-md-8">
+            <div class="message-box menu-description-container">
+              <h2>Menu: {{ quantity.menu.label }}</h2>
+              <div *ngFor="let meal of quantity.menu.meals">
+                <p>Plat : {{ meal.label }}</p>
+                <p>Prix: <span class="text-important">{{ meal.priceDF }} €</span></p>
+              </div>
+            </div>
+          </div>
+          <div matBadge="{{ quantity.quantity }}" class="col-md-3">
+            <div class="services-inner-box">
+              <div class="ser-icon">
+                <img
+                  src="../../../../assets/uploads/gallery_img-01.jpg"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="quantity.meal">
+          <div class="col-md-8">
+            <div class="message-box">
+              <h2>Plat: {{ quantity.meal.label }}</h2>
+
+              <div class="ingredient-container">
+                <p>Ingrédients :</p>
+                <ul *ngFor="let ingredient of quantity.meal.ingredients">
+                  <li>{{ ingredient.label }}</li>
+                </ul>
+              </div>
+
+              <p>Prix: <span class="text-important">{{ quantity.meal.priceDF * quantity.quantity }} €</span></p>
+            </div>
+          </div>
+          <div [matBadge]="quantity.quantity" class="col-md-3">
+            <div class="services-inner-box">
+              <div class="ser-icon">
+                <img
+                  src="../../../../assets/uploads/menu-img-01.jpg"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>

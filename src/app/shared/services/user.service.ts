@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-} from '@angular/common/http';
-import { Observable, pipe, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, pipe } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 
 import { API_URL } from '../constants/api-url';
@@ -28,7 +24,7 @@ export class UserService {
         .pipe(
           map((results) => {
             retry(3),
-            catchError(this.handleError);
+            catchError(handleError);
             console.log(results);
             return results;
           })
@@ -43,7 +39,7 @@ export class UserService {
         .pipe(
           map((results) => {
             retry(3),
-            catchError(this.handleError);
+            catchError(handleError);
             return results;
           })
         )
@@ -57,7 +53,7 @@ export class UserService {
         .pipe(
           map((results) => {
             retry(3),
-            catchError(this.handleError);
+            catchError(handleError);
             return results;
           })
         )
@@ -71,29 +67,47 @@ export class UserService {
         .pipe(
           map((results) => {
             retry(3),
-            catchError(this.handleError);
+            catchError(handleError);
             return results;
           })
         )
     );
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error(
-        `A client-side or network error occurred: ${error.error.message} || `,
-        error.error.message
-      );
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      );
-    }
+  userRegister(user: User): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    });
 
-    // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
-  }
+    const options = {
+      headers,
+      observe: 'response' as 'body' // Pour récupérer toute la réponse du server et non uniquement le body
+    };
+
+    return (
+       this.http.put<any>(`${API_URL}/user/register`, user, options)
+       .pipe(
+        map((results) => {
+          retry(3),
+          catchError(handleError);
+          return results;
+        })
+       )
+     );
+   }
+
+   forgotPassword(email: string): Observable<any>{
+    const params = new HttpParams().set('email', email);
+    return (
+       this.http.post<any>(`${API_URL}/forgotpassword`, params)
+       .pipe(
+        map((results) => {
+          retry(3),
+          catchError(handleError);
+          return results;
+        })
+       )
+     );
+   }
 }

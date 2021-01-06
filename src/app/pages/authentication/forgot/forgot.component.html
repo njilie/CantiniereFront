@@ -1,0 +1,18 @@
+<div class="container">
+
+    <h1 class="text-center">Mot de passe oublié?</h1>
+    <p class="text-center">Saisissez et validez l'adresse e-mail de votre compte.<br>
+     Vous recevrez ensuite par e-mail un lien vers une page vous permettant de créer facilement votre nouveau mot de passe.</p>
+     <form (ngSubmit)="onSubmit()" [formGroup]="userForm" #registerForm="ngForm" class="text-center mt-5">
+        <div class="form-group">
+            <input type="email"  class="form-control col-md-4 offset-md-4" id="email" placeholder="Enter email" formControlName="email" required>
+        </div>
+        <div class="text-center my-5">
+           <button type="submit" class="btn btn-info" [disabled]="!registerForm.form.valid" (click)="valide()">Validez</button>
+       </div>
+
+     </form>
+     <div *ngIf="clickSubmit">
+        <span *ngIf="email.status != 'valid'" [ngClass]="{'bad': 'message.error'}">{{ message }}</span> 
+    </div>
+</div>

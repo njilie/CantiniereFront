@@ -1,0 +1,38 @@
+h1{
+    /*text-align: center;*/
+    font-weight: bold;
+    font-size: 3em;
+}
+.fa-user{
+    font-size: 4em;
+}
+.avatar{
+    text-align: center;
+    
+}
+.link{
+    float: right;
+    color: cornflowerblue !important;
+}
+.clearfix{
+    clear: both;
+}
+.btn-outline-primary{
+    border: 1 solid blue;
+}
+.info{
+    font-size: 1.5em;
+}
+.bad{
+    color: white;
+    background-color: #a94442;
+    margin: 50px 0;
+    padding: 10px;
+    font-size: 1.2em;
+}
+.connexion{
+    margin: 70px 0 20px 10px;
+}
+.register{
+    margin: 50px 0 20px 20px;
+}

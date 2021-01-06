@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TemplateComponent } from './template/template.component';
-import { ForgotComponent } from './authentication/forgot/forgot.component';
-import { LoginComponent } from './authentication/login/login.component';
-import { LogoutComponent } from './authentication/logout/logout.component';
-import { RegisterComponent } from './authentication/register/register.component';
-import { ProfileComponent } from './profile/profile.component';
+import { TemplateComponent } from './components/template/template.component';
+import { ForgotComponent } from './pages/authentication/forgot/forgot.component';
+import { LoginComponent } from './pages/authentication/login/login.component';
+import { LogoutComponent } from './pages/authentication/logout/logout.component';
+import { RegisterComponent } from './pages/authentication/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MealsOfMenuComponent } from './pages/meals-of-menu/meals-of-menu.component';
+
+import { AuthService } from './shared/auth/auth.service';
 
 const routes: Routes = [
   {
@@ -36,15 +39,21 @@ const routes: Routes = [
       },
       {
         path: 'home', // /home
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: 'menu/:id/meals', // /menu/:id/meals
+        component: MealsOfMenuComponent,
       },
       {
         path: 'orders', // /orders
-        loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+        loadChildren: () => import('./pages/orders/orders.module').then(m => m.OrdersModule),
+        canActivate: [AuthService]
       },
       {
         path: 'profile', // /profile
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [AuthService]
       },
     ]
   }

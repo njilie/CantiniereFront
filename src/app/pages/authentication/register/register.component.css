@@ -1,0 +1,15 @@
+.bad{
+    color: white;
+    background-color: #a94442;
+    margin: 50px 0;
+    padding: 10px;
+    font-size: 1.2em;
+}
+.row{
+    margin: 10px 0;
+}
+h1{
+    margin: 40px 0 !important;
+    font-weight: bold;
+    font-size: 2.5em;
+}
