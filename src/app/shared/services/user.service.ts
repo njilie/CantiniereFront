@@ -25,7 +25,6 @@ export class UserService {
           map((results) => {
             retry(3),
             catchError(handleError);
-            console.log(results);
             return results;
           })
         )

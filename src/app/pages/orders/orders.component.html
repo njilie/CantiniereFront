@@ -15,32 +15,32 @@
           </ng-template>
         </div>
 
-        <div *ngIf="orders" class="col-lg-4">
-          <div *ngIf="orders[0]">
-            <button *ngIf="orders[0].status === 0" (click)="makeOrder(orders[0].id)"
-            class="sim-btn hvr-radial-in m-r-10">
-              Commander
-            </button>
-            <button *ngIf="orders[0].status === 0" (click)="removeOrder(orders[0].id)"
-            class="sim-btn hvr-radial-in">
-              Annuler la commande
-            </button>
-          </div>
+        <div *ngIf="orders.length > 0" class="col-lg-4">
+          <button *ngIf="orders[0].status === 0" (click)="makeOrder(orders[0].id)"
+          class="sim-btn hvr-radial-in m-r-10">
+            Commander
+          </button>
+          <button *ngIf="orders[0].status === 0" (click)="removeOrder(orders[0].id)"
+          class="sim-btn hvr-radial-in">
+            Annuler la commande
+          </button>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-8">
-          <div class="message-box">
-            <h2>Mon panier</h2>
+      <div *ngIf="orders.length > 0">
+        <div *ngIf="orders[0].status === 0" class="row">
+          <div class="col-md-8">
+            <div class="message-box">
+              <h2>Mon panier</h2>
+            </div>
           </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="message-box">
-            <h2>
-              Argent restant : <span class="text-important">{{ user.wallet | number:'1.1-2' }} €</span>
-            </h2>
+          <div class="col-md-4">
+            <div class="message-box">
+              <h2>
+                Argent restant : <span class="text-important">{{ user.wallet | number:'1.1-2' }} €</span>
+              </h2>
+            </div>
           </div>
         </div>
       </div>

@@ -2,16 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TemplateComponent } from './components/template/template.component';
+import { MealsOfMenuComponent } from './pages/meals-of-menu/meals-of-menu.component';
 import { ForgotComponent } from './pages/authentication/forgot/forgot.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
 import { LogoutComponent } from './pages/authentication/logout/logout.component';
 import { RegisterComponent } from './pages/authentication/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { MealsOfMenuComponent } from './pages/meals-of-menu/meals-of-menu.component';
 
 import { AuthService } from './shared/auth/auth.service';
 
 const routes: Routes = [
+  {
+    path: 'admin', // /admin
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthService]
+  },
   {
     path: 'login', // /login
     component: LoginComponent

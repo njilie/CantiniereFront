@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {
-  HttpHeaders,
-  HttpClient,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map, retry, catchError } from 'rxjs/operators';
 import { API_URL } from '../constants/api-url';
-import { Observable, throwError } from 'rxjs';
 import { handleError } from '../constants/handle-http-errors';
 import { User /*UserOUT*/ } from '../interfaces/user';
 

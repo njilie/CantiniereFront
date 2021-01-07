@@ -41,14 +41,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     AppComponent,
     TemplateComponent,
+    MealsOfMenuComponent,
     LoginComponent,
     RegisterComponent,
     ForgotComponent,
     LogoutComponent,
     ProfileComponent,
     NavBarComponent,
-    FooterComponent,
-    MealsOfMenuComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
