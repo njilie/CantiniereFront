@@ -18,7 +18,7 @@ export class UserAdminComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private adminService: AdminService) { }
+    private adminService: AdminService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.params
@@ -31,7 +31,7 @@ export class UserAdminComponent implements OnInit {
   }
 
   get(id: number): void {
-    this.adminService.get(id)
+    this.userService.user(id)
     .subscribe((data: any) => {
       this.user = data;
     })
@@ -44,7 +44,7 @@ export class UserAdminComponent implements OnInit {
   }
 
   onClick(): void {
-    this.adminService.update(this.user.id, this.user)
+    this.userService.update(this.user.id, this.user)
     .subscribe((data)=> {console.log(data)
       this.router.navigate(['/admin/users']);
     });
