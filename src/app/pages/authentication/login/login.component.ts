@@ -47,9 +47,6 @@ export class LoginComponent implements OnInit {
     if (this.userForm.valid) {
       this.authService.login(this.userForm.value).subscribe(
         (data) => {
-          if(this.userForm.controls['email'].value == 'admin@gmail.com'){
-          
-          }
         this.router.navigate(['/']);
         },
         (error) => {
