@@ -10,6 +10,7 @@ export interface MenuOUT {
     imageId: number;
     availableForWeeks: number[];
     meals: MealOUT[];
+    imgUrl: string;
 }
 
 export interface MenuIN {

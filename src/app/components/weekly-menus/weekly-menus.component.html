@@ -1,24 +1,11 @@
-<!-- Avec image -->
-    <!-- <div class="gallery-list row">
-    <div *ngFor="let menu of menus; let i = index;" class="col-md-4 col-sm-6 gallery-grid gal_a">
-        <div class="gallery-single fix">
-            <img [src]="menusImages[i].image64" class="img-fluid" alt="Image">
-            <div class="img-overlay">
-                <h3>{{ menu.label }}</h3>
-                <a [routerLink]="['/menu', menu.id, 'meals']" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="fa fa-picture-o"></i></a>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <!-- Sans image -->
 <div class="gallery-list row">
-  <div *ngFor="let menu of menus" class="col-md-4 col-sm-6">
-    <div class="gallery-single fix">
-      <img src="../../../assets/uploads/gallery_img-01.jpg" class="img-fluid" alt="Image">
+  <div *ngFor="let menu of menus" class="col-md-3 col-sm-4">
+    <div class="gallery-single fix"  [routerLink]="['/menu', menu.id, 'meals']">
+      <img [src]="menu.imgUrl" alt="photo des menus" class="img-fluid">
       <div class="img-overlay">
         <h3>{{ menu.label }}</h3>
-        <a [routerLink]="['/menu', menu.id, 'meals']" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius">
+        <a data-rel="prettyPhoto[gal]" class="hoverbutton global-radius" style="margin-top: 2px;">
           <i class="fa fa-picture-o"></i>
         </a>
       </div>

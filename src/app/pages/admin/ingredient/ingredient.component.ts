@@ -20,6 +20,7 @@ export class IngredientComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private ingredientService: IngredientService,
     private adminService: AdminService) { }
 
   ngOnInit(): void {
@@ -35,7 +36,7 @@ export class IngredientComponent implements OnInit {
   }
 
   get(id: number): void {
-    this.adminService.get(id)
+    this.ingredientService.getIngredient(id)
     .subscribe((data: any) => {
       this.ingredient = data;
     })
@@ -49,7 +50,7 @@ export class IngredientComponent implements OnInit {
   }
 
   onClick(): void {
-    this.adminService.update(this.ingredient.id, this.ingredient)
+    this.adminService.updateIngredient(this.ingredient.id, this.ingredient)
     .subscribe((data)=> {console.log(data)
       this.router.navigate(['/admin/ingredients']);
     });

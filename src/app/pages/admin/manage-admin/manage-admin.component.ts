@@ -4,8 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AdminService } from '../../../shared/services/admin.service';
 import { IngredientOUT } from '../../../shared/interfaces/ingredient';
 import { MealService } from '../../../shared/services/meal.service';
-import { MealOUT } from '../../../shared/interfaces/meal';
-import { User } from '../../../shared/interfaces/user';
+
 
 
 @Component({
@@ -14,6 +13,7 @@ import { User } from '../../../shared/interfaces/user';
   styleUrls: ['./manage-admin.component.css']
 })
 export class ManageAdminComponent implements OnInit {
+
   meal: any;
   paramId: Params;
 
@@ -33,21 +33,15 @@ export class ManageAdminComponent implements OnInit {
   }
 
   get(id: number): void {
-    this.adminService.get(id)
+    this.adminService.getMeal(id)
     .subscribe((data: any) => {
       this.meal = data;
     })
   }
 
-  onSubmit(): void{
-    if (this.meal.id === 0){
-      this.meal.push(this.meal)
-      }  
-  }
-
   onClick(): void {
-    this.adminService.update(this.meal.id, this.meal)
-    .subscribe((data)=> {console.log(data)
+    this.adminService.updateMeal(this.meal.id, this.meal)
+    .subscribe((data)=> {
       this.router.navigate(['/admin/meals']);
     });
     

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       email: ['', Validators.compose([
         Validators.required,
-        //Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
+        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
       ])],
       password: ['', Validators.compose([
         Validators.required,
@@ -47,6 +47,9 @@ export class LoginComponent implements OnInit {
     if (this.userForm.valid) {
       this.authService.login(this.userForm.value).subscribe(
         (data) => {
+          if(this.userForm.controls['email'].value == 'admin@gmail.com'){
+          
+          }
         this.router.navigate(['/']);
         },
         (error) => {

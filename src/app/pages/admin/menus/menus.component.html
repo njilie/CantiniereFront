@@ -3,6 +3,9 @@
 <div *ngIf="menus">   
     <p class="styleMenu">Nos menus 👩‍🍳</p>
     <section>
+        <div style="font-size: 20px; text-align: center; background:#5bc0de;">
+            <button><a routerLink="/admin/newmenu"><strong> Nouveau Menu </strong></a></button>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr class="barreMenu">
@@ -14,8 +17,11 @@
             </thead>
             <tbody>
             <tr *ngFor="let menu of menus">
-            <td><a [routerLink]="['/admin/menu', menu.id]">{{menu.label}}</a>
+            <td><a [routerLink]="['/admin/menu', menu.id]" style="font-size:1.3em;display: block;">{{menu.label}}</a>
                 <ul>
+                    <li>
+                        <small>{{menu.description}}</small>
+                    </li>
                     <li>
                         <div *ngFor="let meal of menu.meals">
                             <p style="color: red">{{ meal.label }}</p>
@@ -28,7 +34,7 @@
             <td>{{menu.imageId}}
                 <div class="ser-icon">
                     <img
-                      src="../../../../assets/uploads/menu-img-01.jpg"
+                    [src]="menu.imgUrl" alt="photo des menus"
                       class="img-fluid"
                       alt=""
                     />
@@ -36,10 +42,8 @@
                 
             </td>
                     
-            <!-- <td><a class="btn btn-danger" (click)="onDelete(meal.id)">X</a></td>  -->
+            <td><a class="btn btn-danger" (click)="onDelete(menu.id)">X</a></td> 
             </tr>
             </tbody> 
         </table>
-        <!-- <div style="background-color: blue; font-size: 20px; text-align: center;"><button><a routerLink="/admin/newmenu"><strong> New Menu </strong></a></button></div> -->
-
     </section>

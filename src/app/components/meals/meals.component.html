@@ -1,20 +1,9 @@
 <div class="row">
-  <!-- Avec image -->
-  <!-- <div *ngFor="let meal of meals; let i = index" class="col-md-3">
-    <div class="services-inner-box">
-      <div class="ser-icon">
-        <img [src]="mealsImages[i].image64" class="img-fluid" alt="">
-      </div>
-      <h2>{{ meal.label }}</h2>
-      <a class="hvr-radial-in cursor-pointer" (click)="orderMaker(meal.id)">{{ meal.priceDF }} €</a>
-    </div>
-  </div> -->
-
   <!-- Sans image -->
   <div *ngFor="let meal of meals" class="col-md-3">
     <div class="services-inner-box">
       <div class="ser-icon">
-        <img src="../../../../assets/uploads/menu-img-02.jpg" class="img-fluid" alt="">
+        <img  [src]="meal.imgUrl" alt="photo des plats" class="img-fluid">
       </div>
       <h2>{{ meal.label }}</h2>
       <a class="hvr-radial-in cursor-pointer" (click)="orderMaker(meal.id)">{{ meal.priceDF }} €</a>

@@ -9,6 +9,8 @@ import { ImageOUT } from '../../shared/interfaces/image';
 import { QuantityIN, QuantityOUT } from '../../shared/interfaces/quantity';
 import { User /*UserOUT*/} from '../../shared/interfaces/user';
 
+import { API_URL } from '../../shared/constants/api-url';
+
 @Component({
   selector: 'app-meals',
   templateUrl: './meals.component.html',
@@ -35,16 +37,16 @@ export class MealsComponent implements OnInit {
       (meals) => {
         this.meals = meals;
         this.loading = false;
-        // this.meals.forEach((meal) => {
-        //   this.mealService.getMealImage(meal.imageId).subscribe(
-        //     (image) => {
-        //       this.mealsImages.push(image);
-        //     },
-        //     (error) => {
-        //       console.log(error);
-        //     }
-        //   );
-        // });
+        this.meals.forEach((meal) => {
+          this.mealService.getMealImage(meal.id).subscribe(
+            (image) => {
+              meal.imgUrl = `${API_URL}/`+image.imagePath;
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        });
       },
       (error) => {
         console.log(error);

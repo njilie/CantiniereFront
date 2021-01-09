@@ -3,6 +3,8 @@ import { MenuService } from '../../shared/services/menu.service';
 import { MenuOUT } from '../../shared/interfaces/menu';
 import { ImageOUT } from '../../shared/interfaces/image';
 
+import { API_URL } from '../../shared/constants/api-url';
+
 @Component({
   selector: 'app-weekly-menus',
   templateUrl: './weekly-menus.component.html',
@@ -27,16 +29,16 @@ export class WeeklyMenusComponent implements OnInit {
       (menus) => {
         this.menus = menus;
         this.loading = false;
-        // this.menus.forEach((menu) => {
-        //   this.menuService.getMenuImage(menu.imageId).subscribe(
-        //     (image) => {
-        //       this.menusImages.push(image);
-        //     },
-        //     (error) => {
-        //       console.log(error);
-        //     }
-        //   );
-        // });
+        this.menus.forEach((menu) => {
+          this.menuService.getMenuImage(menu.id).subscribe(
+            (image) => { 
+              menu.imgUrl = `${API_URL}/`+image.imagePath;
+            },
+           (error) => {
+             console.log(error);
+            }
+        );
+       });
       },
       (error) => {
         console.log(error);

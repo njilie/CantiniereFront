@@ -22,3 +22,15 @@ mat-card-content .container {
     display: none;
   }
 }
+
+.picture{
+  color: rgb(129, 129, 129);
+  width: 180px;
+  height: 80px;
+  margin-top: -20px;
+}
+.profile-camera{
+  position: absolute;
+  top: 25%;
+  left: 17%;
+}

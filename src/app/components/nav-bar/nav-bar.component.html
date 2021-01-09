@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['active']"><span>Accueil</span></a>
+          <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="['active']"><span>Accueil</span></a>
         </li>
 
         <button *ngIf="authService.isUserAuthenticated(); else notAuthenticated"
@@ -30,15 +30,15 @@
           <ng-template #noPicture><mat-icon>account_circle</mat-icon></ng-template>
         </button>
         <mat-menu #profile="matMenu">
-          <button mat-menu-item [routerLink]="['profile']">
+          <button mat-menu-item [routerLink]="['/profile']">
             <mat-icon>face</mat-icon>
             <span>Profil</span>
           </button>
-          <button mat-menu-item [routerLink]="['orders']">
+          <button mat-menu-item [routerLink]="['/orders']">
             <mat-icon>shopping_basket</mat-icon>
             <span>Mes commandes en cours (panier)</span>
           </button>
-          <button mat-menu-item [routerLink]="['orders/all']">
+          <button mat-menu-item [routerLink]="['/orders/all']">
             <mat-icon>format_align_left</mat-icon>
             <span>Toutes mes commandes</span>
           </button>
@@ -47,18 +47,24 @@
             <span *ngIf="user">Cagnotte {{ user.wallet | number:'1.1-2' }} €</span>
           </button>
           <hr>
-          <button mat-menu-item [routerLink]="['logout']">
+          <button mat-menu-item [routerLink]="['/logout']">
             <mat-icon>logout</mat-icon>
             <span>Deconnexion</span>
           </button>
         </mat-menu>
         <ng-template #notAuthenticated>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['login']" [routerLinkActive]="['active']">
+            <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']">
               <span>Connexion</span>
             </a>
           </li>
         </ng-template>
+          <li class="nav-item" *ngIf="authService.isUserAuthenticated() && user.isLunchLady == true">
+            <a class="nav-link" [routerLink]="['/admin/meals']" [routerLinkActive]="['active']">
+              <span>Admin</span>
+            </a>
+          </li>
+
       </ul>
     </div>
   </div>

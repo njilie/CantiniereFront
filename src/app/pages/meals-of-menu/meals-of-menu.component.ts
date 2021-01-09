@@ -9,6 +9,9 @@ import { ImageOUT } from '../../shared/interfaces/image';
 import { User /*UserOUT*/} from '../../shared/interfaces/user';
 import { AuthService } from '../../shared/auth/auth.service';
 
+import { API_URL } from '../../shared/constants/api-url';
+import { MealService } from 'src/app/shared/services/meal.service';
+
 @Component({
   selector: 'app-meals-of-menu',
   templateUrl: './meals-of-menu.component.html',
@@ -22,6 +25,7 @@ export class MealsOfMenuComponent implements OnInit {
 
   constructor(
     private menuService: MenuService,
+    private mealService: MealService,
     private route: ActivatedRoute,
     private orderService: OrderService,
     private authService: AuthService) { }
@@ -41,16 +45,16 @@ export class MealsOfMenuComponent implements OnInit {
       (menu) => {
         this.menu = menu;
         this.loading = false;
-        // this.menus.forEach((menu) => {
-        //   this.menuService.getMenuImage(menu.imageId).subscribe(
-        //     (image) => {
-        //       this.menusImages.push(image);
-        //     },
-        //     (error) => {
-        //       console.log(error);
-        //     }
-        //   );
-        // });
+        this.menu.meals.forEach((menuMeal) => {
+          this.mealService.getMealImage(menuMeal.id).subscribe(
+            (image) => { 
+              menuMeal.imgUrl = `${API_URL}/`+image.imagePath;
+            },
+           (error) => {
+             console.log(error);
+            }
+        );
+       });
       },
       (error) => {
         console.log(error);
