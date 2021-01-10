@@ -35,27 +35,6 @@ export class IngredientComponent implements OnInit {
     })
   }
 
-  get(id: number): void {
-    this.ingredientService.getIngredient(id)
-    .subscribe((data: any) => {
-      this.ingredient = data;
-    })
-  }
-
-  onSubmit(): void{
-    if (this.ingredient.id === 0){
-      this.ingredient.push(this.ingredient)
-      }
-      
-  }
-
-  onClick(): void {
-    this.adminService.updateIngredient(this.ingredient.id, this.ingredient)
-    .subscribe((data)=> {console.log(data)
-      this.router.navigate(['/admin/ingredients']);
-    });
-    
-  }
 
 }
 

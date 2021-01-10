@@ -18,10 +18,8 @@ export class UserAdminComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private adminService: AdminService, 
-    private userService: UserService,
-    private cdRef:ChangeDetectorRef) { }
+    private router: Router, 
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.params

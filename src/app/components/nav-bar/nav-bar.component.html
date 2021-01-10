@@ -60,7 +60,7 @@
           </li>
         </ng-template>
           <li class="nav-item" *ngIf="authService.isUserAuthenticated() && user.isLunchLady == true">
-            <a class="nav-link" [routerLink]="['/admin/meals']" [routerLinkActive]="['active']">
+            <a class="nav-link" [routerLink]="['/admin/menus']" [routerLinkActive]="['active']">
               <span>Admin</span>
             </a>
           </li>
